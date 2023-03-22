@@ -90,6 +90,10 @@ Supports accurate distance measurements
 ![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/components2.png)
 
 
+# Schematic
+![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/Hardware Schematic.png)
+
+
 ## Radar Sensor Assembly - _(Shown Left to Right)_
 
 ![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/WES237A-Presentation_v035.png)
@@ -165,6 +169,11 @@ Data Visualization GUI and Dashboard Application
 Reads and displays sensor data from Influxdb Database
 
 ![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/WES237A-Presentation_v0315.png)
+
+
+# Contactless Health Monitor Main Process Flowchart 
+![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/wes237a-final-project_main-process_Flow.png)
+
 
 # Issues
 
