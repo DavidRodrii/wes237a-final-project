@@ -90,7 +90,7 @@ Supports accurate distance measurements
 ![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/components2.png)
 
 
-# Schematic
+# Hardware Schematic
 ![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/HardwareSchematic.png)
 
 
@@ -171,7 +171,7 @@ Reads and displays sensor data from Influxdb Database
 ![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/WES237A-Presentation_v0315.png)
 
 
-# Contactless Health Monitor Main Process Flowchart 
+# Contactless Health Monitor - Multiprocessing Flowchart 
 ![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/wes237a-final-project_main-process_Flow.png)
 
 
