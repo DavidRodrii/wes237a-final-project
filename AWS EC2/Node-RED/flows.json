@@ -1,0 +1,1046 @@
+[
+    {
+        "id": "dc5cbe0ea17d2e61",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9903e7e573f0a481",
+        "type": "debug",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Status-debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "62e1813aaf7fdc18",
+        "type": "udp in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "test_udp_in",
+        "iface": "",
+        "port": "1113",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "9903e7e573f0a481"
+            ]
+        ]
+    },
+    {
+        "id": "63da7d22afdcc5ec",
+        "type": "tcp in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Connected-Status_tcp_in",
+        "server": "server",
+        "host": "",
+        "port": "11114",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "",
+        "topic": "",
+        "trim": false,
+        "base64": false,
+        "tls": "",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "3e5831af6bf2461f",
+                "9903e7e573f0a481"
+            ]
+        ]
+    },
+    {
+        "id": "3e5831af6bf2461f",
+        "type": "trigger",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "",
+        "op1": "Online",
+        "op2": "Offline",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "10",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "7fb94ecaeb12c16c"
+            ]
+        ]
+    },
+    {
+        "id": "6577bc3845a24381",
+        "type": "inject",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Test_Status",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "3e5831af6bf2461f"
+            ]
+        ]
+    },
+    {
+        "id": "8c3ba8e9f795b107",
+        "type": "inject",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Test_HR",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "110",
+        "payloadType": "str",
+        "x": 100,
+        "y": 280,
+        "wires": [
+            [
+                "7e3637aa5209dd4c"
+            ]
+        ]
+    },
+    {
+        "id": "977ee1bce35907e2",
+        "type": "inject",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Test_Dist",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1.2",
+        "payloadType": "str",
+        "x": 100,
+        "y": 360,
+        "wires": [
+            [
+                "b2d53b10f74e4535"
+            ]
+        ]
+    },
+    {
+        "id": "7fb94ecaeb12c16c",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Parse Status",
+        "func": "msg.payload = {\n    STATUS: msg.payload\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 180,
+        "wires": [
+            [
+                "9903e7e573f0a481",
+                "fd522d792c261cc0"
+            ]
+        ]
+    },
+    {
+        "id": "7e3637aa5209dd4c",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Parse HR",
+        "func": "msg.payload = {\n    HR: parseFloat(msg.payload)\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 320,
+        "wires": [
+            [
+                "10a28e7244c3b931",
+                "a87a0c0006a7b03c"
+            ]
+        ]
+    },
+    {
+        "id": "b2d53b10f74e4535",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Parse Dist",
+        "func": "msg.payload = {\n    DIST: (2*parseFloat(msg.payload))/100\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 380,
+        "wires": [
+            [
+                "10a28e7244c3b931",
+                "a87a0c0006a7b03c"
+            ]
+        ]
+    },
+    {
+        "id": "10a28e7244c3b931",
+        "type": "debug",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "HR-DST-TMP-debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "521e4981ea3a2b91",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Parse Temp",
+        "func": "function convertToF(celsius) {\n    // make the given fahrenheit variable equal the given celsius value\n    // multiply the given celsius value by 9/5 then add 32\n    let fahrenheit = celsius * 9 / 5 + 32\n    // return the variable fahrenheit as the answer\n    return fahrenheit;\n}\n\n\nmsg.payload = {\n    TEMP: convertToF(parseFloat(msg.payload))\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 440,
+        "wires": [
+            [
+                "10a28e7244c3b931",
+                "a87a0c0006a7b03c"
+            ]
+        ]
+    },
+    {
+        "id": "6c5acba56b02536a",
+        "type": "inject",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Test_Temp",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "37.5",
+        "payloadType": "str",
+        "x": 100,
+        "y": 440,
+        "wires": [
+            [
+                "521e4981ea3a2b91"
+            ]
+        ]
+    },
+    {
+        "id": "6f050ac865409fd6",
+        "type": "switch",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Presence",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 320,
+        "y": 580,
+        "wires": [
+            [
+                "868fa69e45da3936"
+            ],
+            [
+                "ecbf4218ba9161eb"
+            ]
+        ]
+    },
+    {
+        "id": "868fa69e45da3936",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Presence Detected",
+        "func": "msg.payload = {\n    PRESENCE: \"Detected\"\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 560,
+        "wires": [
+            [
+                "6e610cb7423ec40d",
+                "9917bfe1d2e7324d"
+            ]
+        ]
+    },
+    {
+        "id": "ecbf4218ba9161eb",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Presence Not Detected",
+        "func": "msg.payload = {\n    PRESENCE: \"Not Detected\"\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 620,
+        "wires": [
+            [
+                "6e610cb7423ec40d",
+                "9917bfe1d2e7324d"
+            ]
+        ]
+    },
+    {
+        "id": "b9c216da78eeb799",
+        "type": "inject",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Test_Presence",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "x": 120,
+        "y": 560,
+        "wires": [
+            [
+                "6f050ac865409fd6"
+            ]
+        ]
+    },
+    {
+        "id": "7c0ad96f09b88ef3",
+        "type": "inject",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Test_Movement",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "02",
+        "payloadType": "str",
+        "x": 840,
+        "y": 260,
+        "wires": [
+            [
+                "6e703f15b663d8ff"
+            ]
+        ]
+    },
+    {
+        "id": "6e703f15b663d8ff",
+        "type": "switch",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Movement",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "00",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "01",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "02",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 1030,
+        "y": 280,
+        "wires": [
+            [
+                "5814ffdc48ec7d69"
+            ],
+            [
+                "7be417e1801cba57"
+            ],
+            [
+                "18813233bf12b420"
+            ]
+        ]
+    },
+    {
+        "id": "5814ffdc48ec7d69",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Mvmt None",
+        "func": "msg.payload = {\n    MOVEMENT: \"None\"\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 380,
+        "wires": [
+            [
+                "dd8fc86d58e25c86",
+                "1a85594886aedfee"
+            ]
+        ]
+    },
+    {
+        "id": "7be417e1801cba57",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Mvmt Stationary",
+        "func": "msg.payload = {\n    MOVEMENT: \"Stationary\"\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 440,
+        "wires": [
+            [
+                "dd8fc86d58e25c86",
+                "1a85594886aedfee"
+            ]
+        ]
+    },
+    {
+        "id": "18813233bf12b420",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Mvmt Active",
+        "func": "msg.payload = {\n    MOVEMENT: \"Active\"\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 500,
+        "wires": [
+            [
+                "dd8fc86d58e25c86",
+                "1a85594886aedfee"
+            ]
+        ]
+    },
+    {
+        "id": "dd8fc86d58e25c86",
+        "type": "debug",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "MVMT-debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "fd522d792c261cc0",
+        "type": "influxdb out",
+        "z": "dc5cbe0ea17d2e61",
+        "influxdb": "ef94d3e0f072126c",
+        "name": "WES237A",
+        "measurement": "HEALTH",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 470,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a87a0c0006a7b03c",
+        "type": "influxdb out",
+        "z": "dc5cbe0ea17d2e61",
+        "influxdb": "ef94d3e0f072126c",
+        "name": "WES237A",
+        "measurement": "HEALTH",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 590,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1a85594886aedfee",
+        "type": "influxdb out",
+        "z": "dc5cbe0ea17d2e61",
+        "influxdb": "ef94d3e0f072126c",
+        "name": "WES237A",
+        "measurement": "HEALTH",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1090,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "47417611eca6460e",
+        "type": "inject",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Test_Raw_Data",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "5359810200010a3a54435359",
+        "payloadType": "str",
+        "x": 120,
+        "y": 760,
+        "wires": [
+            [
+                "6d6b16fa07105e28"
+            ]
+        ]
+    },
+    {
+        "id": "6d6b16fa07105e28",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Parse Raw",
+        "func": "msg.payload = {\n    raw: msg.payload\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 760,
+        "wires": [
+            [
+                "ca58259446dbfb11",
+                "f29ae4df07e8a453"
+            ]
+        ]
+    },
+    {
+        "id": "ca58259446dbfb11",
+        "type": "debug",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Breath-Raw-debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "f29ae4df07e8a453",
+        "type": "influxdb out",
+        "z": "dc5cbe0ea17d2e61",
+        "influxdb": "ef94d3e0f072126c",
+        "name": "WES237A",
+        "measurement": "HEALTH",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 550,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "34efd496d9651f60",
+        "type": "inject",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Test_Breathing",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "16",
+        "payloadType": "str",
+        "x": 120,
+        "y": 680,
+        "wires": [
+            [
+                "7b6ac262fa7423e5"
+            ]
+        ]
+    },
+    {
+        "id": "7b6ac262fa7423e5",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Parse Breathing",
+        "func": "msg.payload = {\n    BREATHE: parseFloat(msg.payload)\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 700,
+        "wires": [
+            [
+                "ca58259446dbfb11",
+                "f29ae4df07e8a453"
+            ]
+        ]
+    },
+    {
+        "id": "c791a16e3a6abfa2",
+        "type": "udp in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Status_udp-1114",
+        "iface": "",
+        "port": "1114",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 120,
+        "y": 200,
+        "wires": [
+            [
+                "3e5831af6bf2461f"
+            ]
+        ]
+    },
+    {
+        "id": "e04e41eaa8d5e680",
+        "type": "udp in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "HR_udp-1115",
+        "iface": "",
+        "port": "1115",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "7e3637aa5209dd4c"
+            ]
+        ]
+    },
+    {
+        "id": "0292097d34a4ba5b",
+        "type": "udp in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Dist_udp-1116",
+        "iface": "",
+        "port": "1116",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 110,
+        "y": 400,
+        "wires": [
+            [
+                "b2d53b10f74e4535"
+            ]
+        ]
+    },
+    {
+        "id": "cdb6e73505aa48b3",
+        "type": "udp in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Temp_udp-1117",
+        "iface": "",
+        "port": "1117",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 120,
+        "y": 480,
+        "wires": [
+            [
+                "521e4981ea3a2b91"
+            ]
+        ]
+    },
+    {
+        "id": "c5e78e276075c7c7",
+        "type": "udp in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Presence_udp-1118",
+        "iface": "",
+        "port": "1118",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 130,
+        "y": 600,
+        "wires": [
+            [
+                "6f050ac865409fd6"
+            ]
+        ]
+    },
+    {
+        "id": "e64644119ac0add6",
+        "type": "udp in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Movement_udp-1119",
+        "iface": "",
+        "port": "1119",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 830,
+        "y": 300,
+        "wires": [
+            [
+                "6e703f15b663d8ff"
+            ]
+        ]
+    },
+    {
+        "id": "355e058870154364",
+        "type": "udp in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Breathing_udp-1120",
+        "iface": "",
+        "port": "1120",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 130,
+        "y": 720,
+        "wires": [
+            [
+                "7b6ac262fa7423e5"
+            ]
+        ]
+    },
+    {
+        "id": "177f1a0c1287337c",
+        "type": "udp in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Raw_udp-1121",
+        "iface": "",
+        "port": "1121",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 120,
+        "y": 800,
+        "wires": [
+            [
+                "6d6b16fa07105e28"
+            ]
+        ]
+    },
+    {
+        "id": "e827715ea9c991c6",
+        "type": "http in",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "http-POST_ToF",
+        "url": "/tof",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 780,
+        "y": 60,
+        "wires": [
+            [
+                "59458bb108cb1bed"
+            ]
+        ]
+    },
+    {
+        "id": "6e610cb7423ec40d",
+        "type": "debug",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Presence-debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "9917bfe1d2e7324d",
+        "type": "influxdb out",
+        "z": "dc5cbe0ea17d2e61",
+        "influxdb": "ef94d3e0f072126c",
+        "name": "WES237A",
+        "measurement": "HEALTH",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 770,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "59458bb108cb1bed",
+        "type": "function",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Parse ToF",
+        "func": "msg.payload = {\n    ToF: parseFloat(msg.payload)/1000\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 60,
+        "wires": [
+            [
+                "51b7ea70b21ff1c6",
+                "cc534bf378d5278c"
+            ]
+        ]
+    },
+    {
+        "id": "51b7ea70b21ff1c6",
+        "type": "debug",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "ToF-debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "cc534bf378d5278c",
+        "type": "influxdb out",
+        "z": "dc5cbe0ea17d2e61",
+        "influxdb": "ef94d3e0f072126c",
+        "name": "WES237A",
+        "measurement": "HEALTH",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 950,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "1076973cedd462f5",
+        "type": "inject",
+        "z": "dc5cbe0ea17d2e61",
+        "name": "Test_ToF",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "x": 780,
+        "y": 100,
+        "wires": [
+            [
+                "59458bb108cb1bed"
+            ]
+        ]
+    },
+    {
+        "id": "ef94d3e0f072126c",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "WES237A",
+        "name": "wes237a",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    }
+]
