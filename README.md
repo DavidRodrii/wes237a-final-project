@@ -91,7 +91,7 @@ Supports accurate distance measurements
 
 
 # Schematic
-![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/Hardware Schematic.png)
+![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/HardwareSchematic.png)
 
 
 ## Radar Sensor Assembly - _(Shown Left to Right)_
