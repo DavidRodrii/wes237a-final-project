@@ -39,6 +39,8 @@ taken to detect reflections, and correlates time to distance value.
 - PYNQ Z2 board joins sensor and networking functionality together 
 to form a discrete health monitoring device
 
+<img src="https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/pynq-mini.png"  width="120" height="75">
+
 
 ## Goals
 - Create a functional contactless IoT health monitoring system using the Xilinx PYNQ Z2 board.
@@ -84,6 +86,9 @@ Supports measurements taken at
 I2C compatible sensor
 Supports accurate distance measurements 
 	of up to 4 meters
+
+![](https://github.com/DavidRodrii/wes237a-final-project/blob/main/img/components2.png)
+
 
 ## Radar Sensor Assembly - _(Shown Left to Right)_
 
